@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Inscrire un titre ici</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <br>
+    <h1>Poc form</h1>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <h1>Upload new File</h1>
+    <form id="formfile" method=post enctype=multipart/form-data>
+      <input type=file name=file><br><br>
+      <input type=submit value=Upload>
+    </form>
+
+
+    <script>
+        jQuery(document).ready(function($) {
+
+            $('#formfile').on('submit', function(e) { //use on if jQuery 1.7+
+                //stop submit the form, we will post it manually.
+                e.preventDefault();
+                // Get form
+                var form = $('#formfile')[0];
+                // Create an FormData object
+                var data = new FormData(form);
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "http://127.0.0.1:5000/form",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (data) {
+                        console.log("SUCCESS : ", data);
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+                 return false;
+            });
+        });
+
+    </script>
+  </body>
+</html>
+
+
